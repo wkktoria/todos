@@ -14,6 +14,12 @@ loadTodoItems();
 
 function addTodo() {
   const todoText = todoInput.value;
+
+  if (todoText === "") {
+    alert("Todo text cannot be empty.");
+    return;
+  }
+
   newTodoItem(todoText, false);
   addButtonsEvents();
   saveTodoItems();
