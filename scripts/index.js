@@ -12,6 +12,10 @@ clearCompletedBtn.addEventListener("click", clearCompleted);
 
 loadTodoItems();
 
+if (todoList.hasChildNodes()) {
+  addButtonsEvents();
+}
+
 function addTodo() {
   const todoText = todoInput.value;
 
