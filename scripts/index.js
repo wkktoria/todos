@@ -33,11 +33,13 @@ function deleteTodo() {
 
 function clearAll() {
   clearList(todoList.children);
+  localStorage.clear();
 }
 
 function clearCompleted() {
   const completedTodoItems = todoList.getElementsByClassName("completed");
   clearList(completedTodoItems);
+  saveTodoItems();
 }
 
 function newTodoItem(text, isCompleted) {
