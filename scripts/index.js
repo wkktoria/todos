@@ -13,7 +13,7 @@ clearCompletedBtn.addEventListener("click", clearCompleted);
 loadTodoItems();
 
 if (todoList.hasChildNodes()) {
-  addButtonsEvents();
+  addButtonsEventsListeners();
 }
 
 function addTodo() {
@@ -25,7 +25,7 @@ function addTodo() {
   }
 
   newTodoItem(todoText, false);
-  addButtonsEvents();
+  addButtonsEventsListeners();
   saveTodoItems();
 }
 
@@ -78,7 +78,7 @@ function clearList(list) {
   }
 }
 
-function addButtonsEvents() {
+function addButtonsEventsListeners() {
   const completeBtnEls = document.querySelectorAll(".complete-btn");
   completeBtnEls.forEach((btn) => {
     btn.addEventListener("click", completeTodo);
