@@ -39,17 +39,22 @@ body {
   text-shadow: 4px 4px var(--primary-dark-color);
 }
 
-.form-container {
-  display: flex;
-  gap: 4px;
+.form-container {}
+
+.form-container form {
+  display: inline-block;
+  padding: 5px;
 }
 
 .todo-input {
+  max-width: 280px;
   font-size: 24px;
   text-align: center;
 }
 
 #add-btn {
+  display: inline-block;
+  font-size: 20px;
   background-color: var(--blue-color);
 }
 
@@ -109,4 +114,10 @@ body {
 
 .completed .complete-btn {
   color: var(--red-color);
+}
+
+#emptytodo-warning {
+  color: var(--red-color);
+  text-align: center;
+  font-weight: 700;
 }
