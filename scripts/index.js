@@ -124,6 +124,11 @@ if (todoList.hasChildNodes()) {
   addButtonsEventsListeners();
 }
 
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    addTodo();
+  }
+});
 addBtn.addEventListener('click', addTodo);
 clearAllBtn.addEventListener('click', clearAll);
 clearCompletedBtn.addEventListener('click', clearCompleted);
