@@ -82,7 +82,17 @@ function addTodo() {
   const todoText = todoInput.value;
 
   if (todoText === '') {
-    alert('Todo text cannot be empty.');
+    const formContainer = document.querySelector('.form-container');
+    const emptyTodoWarning = document.createElement('p');
+    emptyTodoWarning.setAttribute('id', 'emptytodo-warning');
+    emptyTodoWarning.innerText = 'Todo text cannot be empty.';
+
+    formContainer.appendChild(emptyTodoWarning);
+
+    setTimeout(() => {
+      emptyTodoWarning.remove();
+    }, 1000);
+
     return;
   }
 
