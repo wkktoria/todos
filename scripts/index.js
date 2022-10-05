@@ -1,60 +1,12 @@
-const todoInput = document.getElementById("todo-input");
-const todoList = document.getElementById("todo-list");
-const addBtn = document.getElementById("add-btn");
-const clearAllBtn = document.getElementById("clear-all-btn");
-const clearCompletedBtn = document.getElementById("clear-completed-btn");
-
-addBtn.addEventListener("click", addTodo);
-
-clearAllBtn.addEventListener("click", clearAll);
-
-clearCompletedBtn.addEventListener("click", clearCompleted);
-
-loadTodoItems();
-
-if (todoList.hasChildNodes()) {
-  addButtonsEventsListeners();
-}
-
-function addTodo() {
-  const todoText = todoInput.value;
-
-  if (todoText === "") {
-    alert("Todo text cannot be empty.");
-    return;
-  }
-
-  newTodoItem(todoText, false);
-  addButtonsEventsListeners();
-  saveTodoItems();
-}
-
-function completeTodo() {
-  if (this.parentNode.classList.contains("completed")) {
-    this.parentNode.classList.remove("completed");
-  } else {
-    this.parentNode.classList.add("completed");
-  }
-}
-
-function deleteTodo() {
-  this.parentNode.remove();
-}
-
-function clearAll() {
-  clearList(todoList.children);
-  localStorage.clear();
-}
-
-function clearCompleted() {
-  const completedTodoItems = todoList.getElementsByClassName("completed");
-  clearList(completedTodoItems);
-  saveTodoItems();
-}
+const todoInput = document.getElementById('todo-input');
+const todoList = document.getElementById('todo-list');
+const addBtn = document.getElementById('add-btn');
+const clearAllBtn = document.getElementById('clear-all-btn');
+const clearCompletedBtn = document.getElementById('clear-completed-btn');
 
 function newTodoItem(text, isCompleted) {
-  const todoItem = document.createElement("div");
-  todoItem.classList.add("todo-item");
+  const todoItem = document.createElement('div');
+  todoItem.classList.add('todo-item');
   todoItem.innerHTML = `
     <button class="btn complete-btn">
         <i class="fa-regular fa-circle-check" id="complete-icon"></i>
@@ -66,10 +18,77 @@ function newTodoItem(text, isCompleted) {
 `;
 
   if (isCompleted) {
-    todoItem.classList.add("completed");
+    todoItem.classList.add('completed');
   }
 
   todoList.appendChild(todoItem);
+}
+
+function loadTodoItems() {
+  if (localStorage.getItem('todoItems') !== null) {
+    const todoItems = JSON.parse(localStorage.getItem('todoItems'));
+
+    for (let index = 0; index < todoItems.length; index += 1) {
+      const todoItem = todoItems[index];
+      newTodoItem(todoItem.text, todoItem.completed);
+    }
+  }
+}
+
+function completeTodo() {
+  if (this.parentNode.classList.contains('completed')) {
+    this.parentNode.classList.remove('completed');
+  } else {
+    this.parentNode.classList.add('completed');
+  }
+}
+
+function saveTodoItems() {
+  const todoItems = [];
+
+  for (let index = 0; index < todoList.children.length; index += 1) {
+    const todoItem = todoList.children.item(index);
+
+    const todoInfo = {
+      text: todoItem.innerText,
+      completed: todoItem.classList.contains('completed'),
+    };
+
+    todoItems.push(todoInfo);
+  }
+
+  localStorage.setItem('todoItems', JSON.stringify(todoItems));
+}
+
+function deleteTodo() {
+  this.parentNode.remove();
+}
+
+function addButtonsEventsListeners() {
+  const completeBtnEls = document.querySelectorAll('.complete-btn');
+  completeBtnEls.forEach((btn) => {
+    btn.addEventListener('click', completeTodo);
+    btn.addEventListener('click', saveTodoItems);
+  });
+
+  const deleteBtnEls = document.querySelectorAll('.delete-btn');
+  deleteBtnEls.forEach((btn) => {
+    btn.addEventListener('click', deleteTodo);
+    btn.addEventListener('click', saveTodoItems);
+  });
+}
+
+function addTodo() {
+  const todoText = todoInput.value;
+
+  if (todoText === '') {
+    alert('Todo text cannot be empty.');
+    return;
+  }
+
+  newTodoItem(todoText, false);
+  addButtonsEventsListeners();
+  saveTodoItems();
 }
 
 function clearList(list) {
@@ -78,44 +97,23 @@ function clearList(list) {
   }
 }
 
-function addButtonsEventsListeners() {
-  const completeBtnEls = document.querySelectorAll(".complete-btn");
-  completeBtnEls.forEach((btn) => {
-    btn.addEventListener("click", completeTodo);
-    btn.addEventListener("click", saveTodoItems);
-  });
-
-  const deleteBtnEls = document.querySelectorAll(".delete-btn");
-  deleteBtnEls.forEach((btn) => {
-    btn.addEventListener("click", deleteTodo);
-    btn.addEventListener("click", saveTodoItems);
-  });
+function clearAll() {
+  clearList(todoList.children);
+  localStorage.clear();
 }
 
-function saveTodoItems() {
-  let todoItems = [];
-
-  for (let index = 0; index < todoList.children.length; index++) {
-    const todoItem = todoList.children.item(index);
-
-    const todoInfo = {
-      text: todoItem.innerText,
-      completed: todoItem.classList.contains("completed"),
-    };
-
-    todoItems.push(todoInfo);
-  }
-
-  localStorage.setItem("todoItems", JSON.stringify(todoItems));
+function clearCompleted() {
+  const completedTodoItems = todoList.getElementsByClassName('completed');
+  clearList(completedTodoItems);
+  saveTodoItems();
 }
 
-function loadTodoItems() {
-  if (localStorage.getItem("todoItems") !== null) {
-    const todoItems = JSON.parse(localStorage.getItem("todoItems"));
+loadTodoItems();
 
-    for (let index = 0; index < todoItems.length; index++) {
-      const todoItem = todoItems[index];
-      newTodoItem(todoItem.text, todoItem.completed);
-    }
-  }
+if (todoList.hasChildNodes()) {
+  addButtonsEventsListeners();
 }
+
+addBtn.addEventListener('click', addTodo);
+clearAllBtn.addEventListener('click', clearAll);
+clearCompletedBtn.addEventListener('click', clearCompleted);
