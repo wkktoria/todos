@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todos</title>
-    <link rel="stylesheet" href="styles/stylesheet.css" />
-    <link rel="icon" href="assets/icon.svg" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="todo-container">
-      <h2 class="heading">Todos</h2>
-      <div class="form-container">
-        <form>
-          <input
-            type="text"
-            autofocus
-            placeholder="Add a new todo"
-            class="todo-input"
-            id="todo-input"
-            onfocus="this.value=''"
-          />
-        </form>
-        <button class="btn" id="add-btn">
-          Add <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
 
-      <div class="todo-list" id="todo-list"></div>
-      <div class="controls-container">
-        <button class="btn" id="clear-all-btn">Clear all</button>
-        <button class="btn" id="clear-completed-btn">Clear completed</button>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todos</title>
+  <link rel="stylesheet" href="styles/stylesheet.css" />
+  <link rel="icon" href="assets/icon.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="todo-container">
+    <h2 class="heading">Todos</h2>
+    <div class="form-container">
+      <form>
+        <input type="text" autofocus placeholder="Add a new todo" class="todo-input" id="todo-input"
+          onfocus="this.value=''" />
+      </form>
+      <button class="btn" id="add-btn">
+        Add <i class="fa-solid fa-plus"></i>
+      </button>
     </div>
-    <script src="scripts/index.js"></script>
-  </body>
+
+    <div class="todo-list" id="todo-list"></div>
+    <div class="controls-container">
+      <button class="btn" id="clear-all-btn">Clear all</button>
+      <button class="btn" id="clear-completed-btn">Clear completed</button>
+    </div>
+  </div>
+  <script src="scripts/index.js"></script>
+</body>
+
 </html>
